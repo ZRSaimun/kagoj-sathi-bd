@@ -65,3 +65,14 @@ test('page exposes labelled controls, local script and no external model script'
   assert.match(html,/role="log"/);
   assert.doesNotMatch(html,/<script[^>]*https?:/i);
 });
+
+test('Bangla identity digits and pre-review clock fail closed',()=>{
+  assert.equal(ask('আমার নম্বর ১২৩৪৫৬৭৮৯০',scenario,'bn').kind,'error');
+  assert.equal(ask('passport checklist',scenario,'en','2026-01-01').kind,'abstain');
+  assert.equal(evidenceState(KNOWLEDGE.fees,'2026-01-01'),'unknown');
+});
+test('source dates are disclosed without inventing effective dates',()=>{
+  const source=ask('How much is the fee?').sources[0];
+  assert.equal(source.sourceUpdatedOn,'2026-07-12');
+  assert.equal(source.effectiveOn,null);
+});
