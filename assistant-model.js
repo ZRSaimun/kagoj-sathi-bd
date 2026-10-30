@@ -69,7 +69,7 @@ export function answerQuestion(query, scenario = {}, language = 'bn', today = RE
   }
   const text = query.toLocaleLowerCase('en').trim().replace(/\s+/g, ' ');
   // Do not accept personal identifiers or instructions that attempt to change the evidence policy.
-  if (/\b\d{6,}\b/u.test(text) || /[\w.+-]+@[\w.-]+\.[a-z]{2,}/iu.test(text) || /\b(?:otp|password|pin)\s*[:=]\s*\S+/iu.test(text)) {
+  if (/[0-9\u09e6-\u09ef]{6,}/u.test(text) || /[\w.+-]+@[\w.-]+\.[a-z]{2,}/iu.test(text) || /\b(?:otp|password|pin)\s*[:=]\s*\S+/iu.test(text)) {
     return response('error', tr(lang, 'ব্যক্তিগত নম্বর, ইমেইল বা গোপন তথ্য লিখবেন না। প্রশ্নটি সেগুলো ছাড়া আবার করুন।', 'Do not enter identity numbers, email addresses or secrets. Ask without them.'));
   }
   if (has(text, ['ignore previous', 'ignore all', 'system prompt', 'developer instruction', 'bypass', 'jailbreak', 'নিয়ম উপেক্ষা', 'নির্দেশনা উপেক্ষা'])) {
