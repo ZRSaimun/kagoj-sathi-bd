@@ -1,4 +1,5 @@
 import {checklistFor, reviewState, SOURCES, REVIEWED_ON, REVIEW_DUE} from './passport-model.js';
+import {scenarioFromFragment} from './scenario-link.js';
 const form = document.querySelector('#planner');
 const error = document.querySelector('#form-error');
 const results = document.querySelector('#results');
@@ -33,6 +34,15 @@ form.addEventListener('submit', event => {
   try { items = checklistFor(choice); selected = new Set(); error.hidden = true; error.textContent = ''; results.hidden = false; render(); document.querySelector('#result-heading').focus(); }
   catch { results.hidden = true; error.textContent = 'আবেদনস্থল, বয়স ও আবেদনের ধরন—সবগুলো নির্বাচন করুন।'; error.hidden = false; error.focus?.(); }
 });
-for (const field of form.querySelectorAll('select')) field.addEventListener('change', () => { results.hidden = true; selected.clear(); });
+for (const field of form.querySelectorAll('select')) field.addEventListener('change', () => { results.hidden = true; selected.clear(); document.querySelector('#handoff-note').hidden = true; });
 document.querySelector('#clear').addEventListener('click', () => { selected.clear(); render(); });
 document.querySelector('#print').addEventListener('click', () => window.print());
+
+// Fragment values are strict enums. Never import a question, document or identity number.
+const carried = scenarioFromFragment(window.location.hash);
+if (carried) {
+  for (const [key, value] of Object.entries(carried)) document.querySelector('#' + key).value = value;
+  document.querySelector('#handoff-note').hidden = false;
+  if (typeof form.requestSubmit === 'function') form.requestSubmit();
+  else form.dispatchEvent(new Event('submit', {bubbles:true, cancelable:true}));
+}
