@@ -1,3 +1,14 @@
+/* The homepage now promotes the live WebGL scene. Keep the old recorded-scene
+   markup as a safe fallback for cached releases, but upgrade it before the
+   browser starts video playback. */
+const recorded=document.querySelector('[data-living]');
+if(recorded){
+ const live=document.createElement('section');
+ live.className='scene-stage';live.dataset.scene='paper';live.setAttribute('aria-labelledby','scene-title');
+ live.innerHTML='<div class="scene-copy"><p class="scene-kicker">KAGOJSATHI / ONE STEP AT A TIME</p><h1 id="scene-title">Paperwork, <em>made clearer.</em></h1><p>Enter the preparation desk. Choose a service, open the guide, and build your checklist without uploading identity documents.</p><div class="scene-controls"><a class="film-cta" href="#service">Choose your service <span aria-hidden="true">↗</span></a><button type="button" data-motion-toggle aria-pressed="true">Pause scene</button><label>Scene progress<input data-growth type="range" min="0" max="100" value="75" aria-label="Scene progress"></label><span data-growth-label role="status">Mature canopy</span></div></div><div class="scene-view"><canvas aria-label="Animated paper preparation scene"></canvas><div class="scene-fallback" hidden><p>Interactive scene unavailable. Use the service guide below.</p></div></div>';
+ recorded.replaceWith(live);
+ import('./scene.js');
+}
 const scene=document.querySelector('[data-living]');
 if(scene){
  const video=scene.querySelector('video'),button=scene.querySelector('[data-film-toggle]'),status=scene.querySelector('[data-film-status]'),progress=scene.querySelector('[data-film-progress]');
