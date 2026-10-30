@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ই-পাসপোর্টের প্রস্তুতি নিয়ে বাংলায় বা ইংরেজিতে প্রশ্ন করুন। পর্যালোচিত সরকারি উৎসের লিংকসহ অফলাইন FAQ, লাইভ AI নয়।">
+<title>পাসপোর্ট প্রশ্ন সহায়ক | কাগজসাথী</title>
+<link rel="stylesheet" href="./assistant.css">
+</head>
+<body>
+<a class="skip" href="#main">মূল বিষয়ে যান / Skip to content</a>
+<header class="top"><a href="./passport-guide.html">← প্রস্তুতির তালিকা / Checklist</a><span>কাগজসাথী · স্বাধীন সহায়ক</span></header>
+<main id="main">
+  <section class="intro" aria-labelledby="page-title">
+    <p class="eyebrow">কাগজসাথী / KAGOJSATHI</p>
+    <h1 id="page-title">কাগজপত্র নিয়ে প্রশ্ন আছে?</h1>
+    <p class="lead">Ask in Bangla or English. Get a reviewed preparation guide with official links—not a government decision.</p>
+    <p class="notice"><strong>পর্যালোচিত FAQ, লাইভ AI নয়।</strong> উত্তর আপনার ডিভাইসেই তৈরি হয়। প্রশ্ন সার্ভারে পাঠানো, সংরক্ষণ বা AI কোম্পানিতে শেয়ার করা হয় না। NID, পাসপোর্ট নম্বর, OTP, পাসওয়ার্ড, নাম বা স্ক্যান লিখবেন না।</p>
+  </section>
+  <section class="workspace" aria-label="পাসপোর্ট প্রশ্ন সহায়ক / Passport question guide">
+    <aside class="context" aria-labelledby="scenario-title">
+      <p class="eyebrow">01 / CONTEXT</p><h2 id="scenario-title">আপনার পরিস্থিতি / Your scenario</h2>
+      <p>ব্যক্তিগত নম্বর নয়—শুধু সাধারণ বিকল্প বেছে নিন।</p>
+      <label for="language">ভাষা / Language</label>
+      <select id="language"><option value="bn">বাংলা</option><option value="en">English</option></select>
+      <label for="location">আবেদনস্থল / Location</label>
+      <select id="location"><option value="">নির্বাচন করুন / Choose</option><option value="bd">বাংলাদেশে / Inside Bangladesh</option><option value="mission">বাংলাদেশ মিশন / Bangladesh mission</option></select>
+      <label for="age">বয়স / Age group</label>
+      <select id="age"><option value="">নির্বাচন করুন / Choose</option><option value="under18">১৮-এর নিচে / Under 18</option><option value="18to20">১৮–২০ / 18–20</option><option value="over20">২০-এর বেশি / Over 20</option></select>
+      <label for="request">আবেদনের ধরন / Request</label>
+      <select id="request"><option value="">নির্বাচন করুন / Choose</option><option value="new">নতুন / New</option><option value="reissue">রি-ইস্যু / Reissue</option><option value="lost">হারানো / Lost</option></select>
+      <a id="checklist-link" class="checklist-link" href="./passport-guide.html">আপনার বিকল্পসহ চেকলিস্ট / Open checklist with choices</a>
+      <p class="hint">তিনটি সাধারণ বিকল্প বেছে নিলে শুধু সেগুলো লিংকের # অংশে থাকবে। প্রশ্ন, নাম বা নম্বর থাকবে না। লিংকটি ব্রাউজার ইতিহাসে থাকতে পারে। / Only the three choices are included in the link fragment, not your question or identity. The link may remain in browser history.</p>
+    </aside>
+    <div class="conversation">
+      <div class="conversation-head"><div><p class="eyebrow">02 / QUESTIONS</p><h2>উৎসসহ উত্তর / Sourced answers</h2></div><button id="clear" class="ghost" type="button">ইতিহাস মুছুন / Clear</button></div>
+      <p id="network" class="network" role="status"></p>
+      <div class="examples" aria-label="Example questions">
+        <button type="button" data-question="পাসপোর্ট হারালে কী যাচাই করব?">হারানো পাসপোর্ট?</button>
+        <button type="button" data-question="What documents do I prepare?">Documents?</button>
+        <button type="button" data-question="How much is the fee?">Fees?</button>
+        <button type="button" data-question="অ্যাপয়েন্টমেন্ট কীভাবে দেখব?">অ্যাপয়েন্টমেন্ট?</button>
+      </div>
+      <div id="transcript" class="transcript" role="log" aria-live="polite" aria-relevant="additions" aria-label="Guide responses">
+        <p class="empty">উপরের উদাহরণ বেছে নিন বা নিচে প্রশ্ন লিখুন। প্রাসঙ্গিক তথ্য না থাকলে এই সহায়ক উত্তর অনুমান করবে না।</p>
+      </div>
+      <form id="question-form" class="question-form">
+        <label for="question">আপনার প্রশ্ন / Your question</label>
+        <div class="compose"><input id="question" name="question" type="text" autocomplete="off" maxlength="240" required placeholder="যেমন: What documents do I need?"><button type="submit">উত্তর দেখুন / Ask</button></div>
+        <p class="hint">সর্বোচ্চ ২৪০ অক্ষর। কোনো তথ্য পাঠানো হয় না। / Max 240 characters; no network submission.</p>
+        <p id="status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+  <section class="footnotes" aria-labelledby="evidence-title">
+    <h2 id="evidence-title">যাচাইয়ের সীমা / Evidence limits</h2>
+    <p>উৎসের সারাংশ সর্বশেষ পর্যালোচনা: <time datetime="2026-10-30">৩০ অক্টোবর ২০২৬</time>। পুনরায় পর্যালোচনা প্রয়োজন: <time datetime="2026-11-30">৩০ নভেম্বর ২০২৬</time>। ডিভাইসের তারিখ ভুল হলে মেয়াদ পরীক্ষা নির্ভরযোগ্য নয়। এই পেজে ফি, অ্যাপয়েন্টমেন্ট, আবেদন অনুমোদন বা অফিসের বর্তমান অবস্থা লাইভ যাচাই হয় না।</p>
+    <p><a href="https://www.epassport.gov.bd/instructions/instructions">সরকারি ই-পাসপোর্ট নির্দেশনা</a> · <a href="https://www.epassport.gov.bd/">সরকারি আবেদন পোর্টাল</a></p>
+  </section>
+  <noscript><p class="notice">JavaScript ছাড়া প্রশ্নের উত্তর পাওয়া যাবে না। উপরের সরকারি লিংক ও <a href="./passport-guide.html">প্রস্তুতির তালিকা</a> ব্যবহার করুন।</p></noscript>
+</main>
+<footer>সরকারি সেবা নয় · No application submission, AI provider, analytics or personal-data storage.</footer>
+<script type="module" src="./assistant.js"></script>
+</body></html>
