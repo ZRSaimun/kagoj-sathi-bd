@@ -1,1 +1,54 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A preparation workspace for official paperwork. No identity document uploads required."><title>কাগজসাথী | Prepare your next step, with confidence.</title><link rel="stylesheet" href="./styles.css"></head><body><a class="skip" href="#main">Skip to content</a><header><strong lang="bn">কাগজসাথী</strong><span class="eyebrow">Bangladesh · Early prototype</span></header><main id="main"><p class="eyebrow">Simple tools for everyday tasks</p><h1>Prepare your next step, with confidence.</h1><p class="lead">A preparation workspace for official paperwork. No identity document uploads required.</p><section class="panel"><h2>আপনার কাজ বেছে নিন · Choose a service</h2><label for="service">Service</label><select id="service"><option value="passport">Passport</option><option value="birth">Birth registration</option><option value="nid">National identity card</option></select><div id="guide"></div><p><a href="./passport-guide.html" lang="bn">ই-পাসপোর্ট: বয়স, আবেদনস্থল ও ধরন অনুযায়ী উৎসসহ প্রস্তুতির তালিকা →</a></p></section><section class="panel"><h2>আমার প্রস্তুতি · My preparation</h2><p>These are preparation prompts, not an official list of required documents. Confirm your case with the responsible authority.</p><div id="checks"></div><p id="progress" role="status"></p><div class="actions"><button id="print">Print checklist</button><button id="reset" class="secondary">Clear saved progress</button></div><p id="storage" role="status"></p></section><noscript><p class="notice">Interactive features require JavaScript. Official links remain available.</p></noscript></main><footer><p>Independent prototype. Not a government service. Progress, where saved, stays in this browser; no account or document upload is needed.</p><a href="https://github.com/ZRSaimun/kagoj-sathi-bd/issues/new">Report a problem on GitHub</a><p>Reports are public. Do not include identity numbers, documents, private contact details or other sensitive information.</p></footer><script type="module" src="./app.js"></script></body></html>
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="কাগজসাথী: সরকারি কাগজপত্রের কাজ শুরুর আগে উৎস যাচাই ও ব্যক্তিগত প্রস্তুতির সহায়ক।">
+  <title>কাগজসাথী | প্রস্তুতির সেবা ডেস্ক</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">মূল বিষয়ে যান</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./index.html" aria-label="কাগজসাথী হোম"><span class="brand-mark" aria-hidden="true">ক</span><span>কাগজসাথী<small>স্বাধীন প্রস্তুতি সহায়ক</small></span></a>
+      <nav aria-label="প্রধান নেভিগেশন"><a href="#choose">সেবা ডেস্ক</a><a href="./passport-guide.html">ই-পাসপোর্ট তালিকা</a><a href="./assistant.html">উৎসসহ প্রশ্নোত্তর</a></nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="intro" aria-labelledby="page-title">
+      <div><p class="kicker">সহজ কাজ · পরিষ্কার ধাপ</p><h1 id="page-title">কাগজের কাজ শুরু করুন <em>সঠিক জায়গা থেকে।</em></h1><p class="intro-copy">একটি সেবা বেছে নিন, সরকারি উৎস খুলুন, তারপর নিজের প্রস্তুতির কাজগুলো চিহ্নিত করুন। কোনো পরিচয়পত্র বা নম্বর এখানে জমা দিতে হবে না।</p></div>
+      <aside class="intro-note" aria-label="সীমাবদ্ধতা"><strong>এটি সরকারি পোর্টাল নয়</strong><p>এই সাইট আবেদন জমা দেয় না এবং ফি, নিয়ম বা অ্যাপয়েন্টমেন্টের লাইভ তথ্য দেখায় না। চূড়ান্ত সিদ্ধান্তের আগে সরকারি উৎস মিলিয়ে নিন।</p><span>তথ্য সহায়ক · ব্যক্তিগত নথি নয়</span></aside>
+    </section>
+    <div class="desk-layout">
+      <aside class="step-rail" aria-label="প্রস্তুতির ধাপ"><p class="rail-title">আপনার পথ</p><ol><li><a href="#choose"><b>০১</b><span>সেবা বেছে নিন<small>কোন কাজটি করবেন?</small></span></a></li><li><a href="#official"><b>০২</b><span>উৎস যাচাই<small>সঠিক সরকারি পোর্টাল</small></span></a></li><li><a href="#prepare"><b>০৩</b><span>নিজের প্রস্তুতি<small>টিক দিন ও প্রিন্ট করুন</small></span></a></li></ol><p class="rail-foot">আপনার নির্বাচন ও প্রস্তুতি এই ব্রাউজারেই থাকে। কোনো অ্যাকাউন্ট প্রয়োজন নেই।</p></aside>
+      <div class="desk-main">
+        <section id="choose" class="desk-section" aria-labelledby="choose-title">
+          <div class="section-head"><span class="step-label">ধাপ ০১</span><div><h2 id="choose-title">কোন সেবার জন্য প্রস্তুতি নিচ্ছেন?</h2><p>একটি নির্বাচন করুন। পরে বদলাতে পারবেন।</p></div></div>
+          <fieldset class="service-options"><legend class="sr-only">সেবার ধরন</legend>
+            <label class="service-option"><input type="radio" name="service" value="passport"><span class="option-number">০১</span><span><strong>ই-পাসপোর্ট</strong><small>নতুন, রি-ইস্যু বা হারানো পাসপোর্ট</small></span><span class="option-arrow" aria-hidden="true">›</span></label>
+            <label class="service-option"><input type="radio" name="service" value="birth"><span class="option-number">০২</span><span><strong>জন্ম নিবন্ধন</strong><small>নিবন্ধন বা সংশোধনের আগে যাচাই</small></span><span class="option-arrow" aria-hidden="true">›</span></label>
+            <label class="service-option"><input type="radio" name="service" value="nid"><span class="option-number">০৩</span><span><strong>জাতীয় পরিচয়পত্র</strong><small>এনরোলমেন্ট বা সংশোধনের আগে যাচাই</small></span><span class="option-arrow" aria-hidden="true">›</span></label>
+          </fieldset>
+        </section>
+        <section id="official" class="desk-section" aria-labelledby="official-title">
+          <div class="section-head"><span class="step-label">ধাপ ০২</span><div><h2 id="official-title">সরকারি উৎস ও করণীয়</h2><p>নির্বাচিত সেবার সরকারি ওয়েবসাইটে বর্তমান নিয়ম দেখুন।</p></div></div>
+          <div id="guide" class="guide-area" aria-live="polite"><p class="empty-message">প্রথমে উপরের তালিকা থেকে একটি সেবা বেছে নিন। এখানে উৎস ও প্রস্তুতির ধাপ দেখা যাবে।</p></div>
+          <div class="source-note"><strong>মনে রাখুন</strong><p>এই সাধারণ নির্দেশনা পূর্ণাঙ্গ সরকারি কাগজপত্রের তালিকা নয়। বয়স, আবেদনস্থল ও আবেদনের ধরন অনুযায়ী শর্ত বদলাতে পারে।</p></div>
+        </section>
+        <section id="prepare" class="desk-section" aria-labelledby="prepare-title">
+          <div class="section-head"><span class="step-label">ধাপ ০৩</span><div><h2 id="prepare-title">আমার প্রস্তুতির খাতা</h2><p>এগুলো নিজের পরিকল্পনার কাজ, বাধ্যতামূলক সরকারি নথির তালিকা নয়।</p></div></div>
+          <div id="checks" class="checklist"><p class="empty-message">সেবা নির্বাচন করলে প্রস্তুতির খাতা চালু হবে।</p></div>
+          <p id="progress" class="progress" role="status" aria-live="polite">এখনও কোনো সেবা নির্বাচন করা হয়নি।</p>
+          <div class="actions"><button id="print" type="button" disabled>প্রস্তুতি প্রিন্ট করুন</button><button id="reset" class="secondary" type="button" disabled>এই সেবার টিক মুছুন</button></div>
+          <p id="storage" class="storage-note" role="status"></p>
+        </section>
+      </div>
+    </div>
+    <section class="help-strip" aria-labelledby="help-title"><div><p class="kicker">সাহায্য ও সংশোধন</p><h2 id="help-title">তথ্য ভুল মনে হচ্ছে?</h2><p>আপনি GitHub-এ একটি পাবলিক রিপোর্টের খসড়া খুলতে পারেন। লিংক খোলা মানে রিপোর্ট জমা দেওয়া নয়। কোনো NID, পাসপোর্ট নম্বর, নথি, ফোন বা ঠিকানা লিখবেন না।</p></div><div class="help-links"><a href="https://github.com/ZRSaimun/kagoj-sathi-bd/issues/new?title=Report%20incorrect%20information">তথ্যে ভুল জানান</a><a href="https://github.com/ZRSaimun/kagoj-sathi-bd/issues/new?title=Was%20this%20helpful">এটি কি কাজে লেগেছে?</a></div></section>
+    <noscript><p class="no-script">এই প্রস্তুতির খাতা চালাতে JavaScript প্রয়োজন। সরকারি পোর্টাল: <a href="https://www.epassport.gov.bd/">ই-পাসপোর্ট</a>, <a href="https://bdris.gov.bd/">জন্ম নিবন্ধন</a>, <a href="https://services.nidw.gov.bd/">NID</a>। <a href="./passport-guide.html">উৎসসহ পাসপোর্ট নির্দেশনা</a>।</p></noscript>
+  </main>
+  <footer><span>কাগজসাথী · স্বাধীন প্রস্তুতি সহায়ক</span><span>সর্বশেষ ডিজাইন পর্যালোচনা: <time datetime="2026-10-30">৩০ অক্টোবর ২০২৬</time> · সরকারি নিয়মের লাইভ যাচাই নয়</span></footer>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
