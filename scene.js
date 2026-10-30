@@ -2,7 +2,7 @@ import {sceneGeometry,growthAt} from './scene-model.js';
 const root=document.querySelector('[data-scene]');
 if(root){
  let canvas=root.querySelector('canvas');const fallback=root.querySelector('.scene-fallback'),button=root.querySelector('[data-motion-toggle]'),slider=root.querySelector('[data-growth]'),label=root.querySelector('[data-growth-label]');
- const preference=matchMedia('(prefers-reduced-motion: reduce)');let playing=!preference.matches,visible=true,failed=false,frame=0,seconds=0,last=0,manual=null;
+ const preference=matchMedia('(prefers-reduced-motion: reduce)');let playing=!preference.matches,visible=true,failed=false,frame=0,seconds=0,last=0,manual=null,displayedGrowth=.75;
  let gl,program,buffer,vertex,fragment,ctx;
  function stop(){cancelAnimationFrame(frame);frame=0;last=0;}
  function fail(){
@@ -28,7 +28,8 @@ if(root){
  }catch{fail();}
  function render(){if(failed)return;try{
   const ratio=Math.min(devicePixelRatio||1,1.5),width=Math.max(1,Math.round(canvas.clientWidth*ratio)),height=Math.max(1,Math.round(canvas.clientHeight*ratio));if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
-  const growth=manual??(playing?growthAt(seconds):.75),vertices=sceneGeometry(root.dataset.scene,seconds,growth);
+  const growth=manual??(playing?growthAt(seconds):displayedGrowth),vertices=sceneGeometry(root.dataset.scene,seconds,growth);
+  displayedGrowth=growth;
   if(ctx)paint(vertices,width,height);else{gl.viewport(0,0,width,height);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.uniform1f(gl.getUniformLocation(program,'aspect'),width/height);gl.uniform1f(gl.getUniformLocation(program,'angle'),.24+Math.sin(seconds*.22)*.16);gl.bufferData(gl.ARRAY_BUFFER,vertices,gl.DYNAMIC_DRAW);gl.drawArrays(gl.TRIANGLES,0,vertices.length/9);}
   if(slider&&manual===null)slider.value=String(Math.round(growth*100));if(label)label.textContent=growth<.2?'Seed & sprout':growth<.65?'Young tree':'Mature canopy';
  }catch{fail();}}
