@@ -1,0 +1,12 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {checklistFor, reviewState, SOURCES, sourcesAreOfficial} from './passport-model.js';
+const choice = {location:'bd',age:'over20',request:'new'};
+const ids = c => checklistFor(c).map(x=>x.id);
+test('adult in Bangladesh checks NID and not mission exception',()=>{assert.ok(ids(choice).includes('identity-adult'));assert.ok(!ids(choice).includes('identity-mission'));});
+test('adult at mission shows source-specific exception',()=>{assert.ok(ids({...choice,location:'mission'}).includes('identity-mission'));assert.ok(!ids({...choice,location:'mission'}).includes('identity-adult'));});
+test('age boundaries and minors differ',()=>{assert.ok(ids({...choice,age:'under18'}).includes('minor'));assert.ok(ids({...choice,age:'18to20'}).includes('identity-young'));assert.ok(!ids({...choice,age:'18to20'}).includes('identity-adult'));});
+test('reissue and lost documents are not mixed',()=>{assert.ok(ids({...choice,request:'reissue'}).includes('old-passport'));assert.ok(!ids({...choice,request:'reissue'}).includes('gd'));assert.ok(ids({...choice,request:'lost'}).includes('gd'));assert.ok(!ids({...choice,request:'lost'}).includes('old-passport'));});
+test('reject missing and invalid choices rather than silently defaulting',()=>{for(const c of [null,{}, {...choice,age:''},{...choice,location:'other'},{...choice,request:'renew'}]) assert.throws(()=>checklistFor(c));});
+test('all IDs unique and all sources are declared official links',()=>{assert.equal(sourcesAreOfficial(),true);for(const location of ['bd','mission'])for(const age of ['under18','18to20','over20'])for(const request of ['new','reissue','lost']){const list=checklistFor({location,age,request});assert.equal(new Set(list.map(x=>x.id)).size,list.length);for(const x of list)assert.ok(SOURCES[x.source]);}});
+test('review status is date-bound, fails closed on bad dates',()=>{assert.equal(reviewState('2026-10-30'),'reviewed');assert.equal(reviewState('2026-11-30'),'reviewed');assert.equal(reviewState('2026-12-01'),'stale');for(const d of ['','tomorrow','2026-02-30','2026-13-01'])assert.equal(reviewState(d),'unknown');});
