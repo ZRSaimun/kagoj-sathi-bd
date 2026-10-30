@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="সরকারি উৎসের লিংকসহ ই-পাসপোর্টের প্রস্তুতি যাচাই করার স্বাধীন সহায়ক।">
+  <title>ই-পাসপোর্ট প্রস্তুতি | কাগজসাথী</title>
+  <link rel="stylesheet" href="./passport-guide.css">
+</head>
+<body>
+<a class="skip" href="#main">মূল বিষয়ে যান</a>
+<header><a href="./index.html" class="back">← কাগজসাথী হোম</a><span>স্বাধীন তথ্য সহায়ক · সরকারি সেবা নয়</span></header>
+<main id="main">
+  <p class="eyebrow">ই-পাসপোর্ট · প্রস্তুতির তালিকা</p>
+  <h1>আপনার পরিস্থিতি অনুযায়ী কী যাচাই করবেন?</h1>
+  <p class="intro">এটি সরকারি নির্দেশনার লিংকসহ একটি <strong>প্রস্তুতি সহায়ক</strong>, আবেদন নয়। এখানে নাম, NID নম্বর, জন্মতারিখ বা নথি দিতে হবে না।</p>
+  <div class="warning" role="note"><strong>গুরুত্বপূর্ণ:</strong> নিয়ম, ফি ও অফিসের শর্ত বদলাতে পারে। সরকারি পোর্টালে মিলিয়ে না দেখে আবেদন বা টাকা জমা দেবেন না। <a href="https://www.epassport.gov.bd/instructions/instructions">সর্বশেষ সরকারি নির্দেশনা পড়ুন</a>।</div>
+  <section class="panel" aria-labelledby="select-heading">
+    <h2 id="select-heading">১. পরিস্থিতি বেছে নিন</h2>
+    <form id="planner" novalidate>
+      <div class="fields">
+        <div><label for="location">কোথায় আবেদন করবেন?</label><select id="location" required><option value="">নির্বাচন করুন</option><option value="bd">বাংলাদেশের ভেতরে</option><option value="mission">বিদেশস্থ বাংলাদেশ মিশনে</option></select></div>
+        <div><label for="age">আবেদনকারীর বয়সের শ্রেণি</label><select id="age" required><option value="">নির্বাচন করুন</option><option value="under18">১৮ বছরের নিচে</option><option value="18to20">১৮ থেকে ২০ বছর</option><option value="over20">২০ বছরের বেশি</option></select></div>
+        <div><label for="request">আবেদনের ধরন</label><select id="request" required><option value="">নির্বাচন করুন</option><option value="new">প্রথমবার / নতুন</option><option value="reissue">রি-ইস্যু</option><option value="lost">হারানো / চুরি হওয়া</option></select></div>
+      </div>
+      <p id="form-error" class="error" role="alert" hidden></p>
+      <button type="submit">আমার প্রস্তুতির তালিকা দেখুন</button>
+    </form>
+  </section>
+  <section class="panel" id="results" aria-labelledby="result-heading" hidden>
+    <h2 id="result-heading" tabindex="-1">২. আপনার যাচাইয়ের তালিকা</h2>
+    <p id="review-status" class="warning"></p>
+    <p>এগুলি সরকারি উৎসের সারসংক্ষেপ; চূড়ান্ত কাগজপত্রের সিদ্ধান্ত সংশ্লিষ্ট অফিসের। প্রতিটি বিষয়ের উৎস খুলে যাচাই করুন। টিক চিহ্ন শুধু এই পেজ খোলা থাকা পর্যন্ত থাকবে।</p>
+    <div id="checklist" class="checklist"></div>
+    <p id="progress" role="status" aria-live="polite"></p>
+    <div class="actions"><button type="button" id="print">তালিকা প্রিন্ট করুন</button><button type="button" id="clear" class="secondary">টিক চিহ্ন মুছুন</button></div>
+  </section>
+  <section class="panel" aria-labelledby="sources-heading">
+    <h2 id="sources-heading">সরকারি উৎস ও পর্যালোচনা</h2>
+    <p>উৎসগুলো শেষ পর্যালোচনা: <time datetime="2026-10-30">৩০ অক্টোবর ২০২৬</time>। পরবর্তী কনটেন্ট পর্যালোচনা: <time datetime="2026-11-30">৩০ নভেম্বর ২০২৬</time>। এই তারিখগুলো নতুন সরকারি নিয়ম নিশ্চিত করে না।</p>
+    <ul id="sources"><li><a href="https://www.epassport.gov.bd/instructions/instructions">সরকারি ই-পাসপোর্ট নির্দেশনা</a></li><li><a href="https://www.epassport.gov.bd/landing/notices/160">অফিসের এনরোলমেন্ট চেকলিস্ট</a></li><li><a href="https://epassport.gov.bd/instructions/passport-fees">সরকারি ফি ও পেমেন্ট</a></li><li><a href="https://www.epassport.gov.bd/">আবেদন পোর্টাল</a></li></ul>
+    <p><a href="https://github.com/ZRSaimun/kagoj-sathi-bd/issues/new?title=Passport%20guide%20correction">তথ্যে ভুল জানান</a> · <a href="https://github.com/ZRSaimun/kagoj-sathi-bd/issues/new?title=Passport%20guide%20feedback">এটি কি কাজে লেগেছে? মতামত দিন</a></p>
+    <p class="privacy">এই লিংকগুলি GitHub-এ <strong>পাবলিক</strong> issue লেখার পেজ খুলবে; কোনো রিপোর্ট স্বয়ংক্রিয়ভাবে পাঠানো হয় না। NID, পাসপোর্ট নম্বর, ব্যক্তিগত নথি, ফোন বা ঠিকানা লিখবেন না।</p>
+  </section>
+  <noscript><p class="warning">ইন্টারেক্টিভ তালিকা দেখতে JavaScript প্রয়োজন। উপরের সরকারি উৎসের লিংকগুলো JavaScript ছাড়াও কাজ করবে।</p></noscript>
+</main>
+<footer>কাগজসাথী · স্বাধীন শিক্ষামূলক সহায়ক · কোনো সরকারি অনুমোদন বা লাইভ যাচাই দাবি করা হচ্ছে না।</footer>
+<script type="module" src="./passport-guide.js"></script>
+</body></html>
