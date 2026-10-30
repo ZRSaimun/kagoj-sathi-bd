@@ -16,7 +16,7 @@ This is not an AI model or live official rule check. The reviewed FAQ and checkl
 
 Run `npm test`, `node --check assistant.js`, `node --check passport-guide.js` and `node --check scenario-link.js`. Serve the repository with `python3 -m http.server 8000`; open `http://localhost:8000/assistant.html`, select all three fields and ask `What documents do I prepare?`. The answer's checklist link and sidebar link should open a matching, generated checklist with the carried-choice notice. Test missing selections, a tampered `#v=1...` fragment, changing a selection, browser back, no-JavaScript links, print, 320/390px and 200% zoom, keyboard focus, screen-reader status, reduced motion and Bangla glyphs. These served-browser checks are required before release, not implied by unit tests.
 
-The added Node tests cover all 18 valid combinations, partial selections, invalid and duplicated keys, unknown versions, oversized fragments, prototype-like keys and source integration. No runtime dependencies or paid services were added.
+The seven added Node tests cover all 18 valid combinations, partial selections, invalid and duplicated keys, unknown versions, oversized fragments, prototype-like keys, source integration and JavaScript syntax for both browser pages. No runtime dependencies or paid services were added.
 
 ## Research and release limits
 
