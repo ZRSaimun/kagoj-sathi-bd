@@ -10,6 +10,11 @@ export const KNOWLEDGE = Object.freeze({
   lost: {sourceIds: ['instructions'], applicable: 'Lost/stolen passport requests', reviewedOn: REVIEWED_ON, dueOn: REVIEW_DUE},
   reissue: {sourceIds: ['instructions'], applicable: 'Reissue requests', reviewedOn: REVIEWED_ON, dueOn: REVIEW_DUE}
 });
+const SOURCE_UPDATED_ON = Object.freeze({
+  instructions: '2026-08-03', enrollment: '2024-10-21',
+  appointment: '2025-05-24', fees: '2026-07-12', portal: null
+});
+// Source update dates are recorded by stage 3, not legally effective dates.
 const EN_STEPS = Object.freeze({
   match: 'Compare the application details with the official identity-record instructions.',
   form: 'Review how to complete and print the official online application.',
@@ -42,7 +47,7 @@ function officialSources(ids) {
     if (!source) return null;
     const url = new URL(source.url);
     if (url.protocol !== 'https:' || !['epassport.gov.bd', 'www.epassport.gov.bd'].includes(url.hostname)) return null;
-    return {id, label: source.label, url: source.url, reviewedOn: REVIEWED_ON};
+    return {id, label: source.label, url: source.url, sourceUpdatedOn: SOURCE_UPDATED_ON[id] ?? null, effectiveOn: null, reviewedOn: REVIEWED_ON};
   }).filter(Boolean);
 }
 function response(kind, message, ids = ['instructions'], steps = [], link = null) {
@@ -54,7 +59,7 @@ export function evidenceState(record, today) {
   if (record.status === 'conflict') return 'conflict';
   if (record.status && record.status !== 'reviewed') return 'missing';
   if (record.reviewedOn !== REVIEWED_ON || record.dueOn !== REVIEW_DUE) return 'missing';
-  return reviewState(today);
+  return typeof today === 'string' && today < REVIEWED_ON ? 'unknown' : reviewState(today);
 }
 const tr = (lang, bn, en) => lang === 'en' ? en : bn;
 export function answerQuestion(query, scenario = {}, language = 'bn', today = REVIEWED_ON) {
@@ -71,7 +76,7 @@ export function answerQuestion(query, scenario = {}, language = 'bn', today = RE
     return response('abstain', tr(lang, 'শুধু যাচাইযোগ্য সরকারি উৎসের বিষয়েই সাহায্য করতে পারি।', 'I can only help with topics covered by reviewed official sources.'));
   }
   const freshness = reviewState(today);
-  if (freshness !== 'reviewed') {
+  if (freshness !== 'reviewed' || today < REVIEWED_ON) {
     return response('abstain', tr(lang, 'এই সহায়িকার তথ্যের পর্যালোচনার মেয়াদ শেষ বা ডিভাইসের তারিখ অনিশ্চিত। বর্তমান নিয়ম নিশ্চিত করতে পারছি না।', 'This guide is overdue for review or the device date is uncertain. I cannot verify current requirements.'), ['instructions', 'portal']);
   }
   if (has(text, ['right now', 'currently', 'today', 'live', 'latest', 'guarantee', 'এখন', 'আজ', 'সর্বশেষ', 'নিশ্চিত হবে'])) {
