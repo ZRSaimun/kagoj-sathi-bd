@@ -5,9 +5,9 @@ import {fileURLToPath} from 'node:url';
 export async function buildSite(root) {
   root = resolve(root);
   const names = (await readdir(root)).filter(name =>
-    /\.(html|css|js|jpg)$/.test(name) && !name.endsWith('.test.js'));
+    /\.(html|css|js|jpg|mp4)$/.test(name) && !name.endsWith('.test.js'));
   if (!names.includes('index.html')) throw new Error('Missing index.html');
-  const files = new Map(await Promise.all(names.map(async name => [name, await readFile(resolve(root, name), name.endsWith('.jpg') ? undefined : 'utf8')])));
+  const files = new Map(await Promise.all(names.map(async name => [name, await readFile(resolve(root, name), /\.(jpg|mp4)$/.test(name) ? undefined : 'utf8')])));
   for (const [name, source] of files) {
     const refs = name.endsWith('.html')
       ? [...source.matchAll(/(?:src|href)\s*=\s*["']([^"']+)["']/g)].map(m => m[1])

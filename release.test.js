@@ -41,3 +41,10 @@ test('release preserves linked photograph bytes without UTF-8 conversion',async 
  await buildSite(root);
  assert.deepEqual(await readFile(join(root,'dist','photo-hero.jpg')),photo);
 });
+test('release preserves video bytes and validates the video source',async t=>{
+ const root=await fixture(t),clip=Buffer.from([0,0,0,24,102,116,121,112,128,255,0,254]);
+ await writeFile(join(root,'index.html'),'<video src="./living-scene.mp4"></video>');
+ await assert.rejects(buildSite(root),/unpublished local reference/);
+ await writeFile(join(root,'living-scene.mp4'),clip);await buildSite(root);
+ assert.deepEqual(await readFile(join(root,'dist','living-scene.mp4')),clip);
+});
