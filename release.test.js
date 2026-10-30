@@ -33,3 +33,11 @@ test('root-relative and parent paths are rejected for project Pages sites',async
  await assert.rejects(buildSite(root),/unpublished local reference/);
  }
 });
+
+test('release preserves linked photograph bytes without UTF-8 conversion',async t=>{
+ const root=await fixture(t),photo=Buffer.from([255,216,255,224,0,16,128,254,255,217]);
+ await writeFile(join(root,'index.html'),'<img src="./photo-hero.jpg" alt="Workspace">');
+ await writeFile(join(root,'photo-hero.jpg'),photo);
+ await buildSite(root);
+ assert.deepEqual(await readFile(join(root,'dist','photo-hero.jpg')),photo);
+});

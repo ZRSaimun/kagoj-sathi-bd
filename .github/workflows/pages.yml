@@ -25,7 +25,7 @@ jobs:
       - name: Prepare public files
         run: |
           mkdir -p _site
-          find . -maxdepth 1 -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' \) ! -name '*.test.js' -exec cp {} _site/ \;
+          find . -maxdepth 1 -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.jpg' \) ! -name '*.test.js' -exec cp {} _site/ \;
           touch _site/.nojekyll
           test -s _site/index.html
       - uses: actions/configure-pages@v5
@@ -35,3 +35,4 @@ jobs:
       - name: Publish
         id: deployment
         uses: actions/deploy-pages@v4
+
