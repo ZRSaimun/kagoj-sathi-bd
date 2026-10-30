@@ -1,0 +1,5 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {sceneGeometry,growthAt,kinds} from './scene-model.js';
+test('all five scenes produce finite complete triangles through their animation',()=>{for(const kind of kinds)for(const time of [0,1,6,12,17.9,18,100]){const g=sceneGeometry(kind,time);assert.ok(g.length>0);assert.equal(g.length%27,0);assert.ok(g.every(Number.isFinite));assert.ok(g.length<150000);}});
+test('growth begins at seed, reaches canopy and restarts; manual values clamp',()=>{assert.equal(growthAt(0),0);assert.equal(growthAt(12),1);assert.equal(growthAt(18),0);assert.equal(growthAt(-1),0);assert.deepEqual(sceneGeometry('tree',0,-2),sceneGeometry('tree',0,0));assert.deepEqual(sceneGeometry('tree',0,2),sceneGeometry('tree',0,1));assert.notDeepEqual(sceneGeometry('tree',0,0),sceneGeometry('tree',0,1));});
+test('unrecognised scene and nonfinite state cannot enter rendering',()=>{assert.throws(()=>sceneGeometry('bad'));assert.throws(()=>sceneGeometry('water',NaN));assert.throws(()=>sceneGeometry('tree',0,Infinity));});
+
