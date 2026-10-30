@@ -50,3 +50,18 @@ test('conflicting and missing editorial evidence fail closed',()=>{
   assert.equal(evidenceState({...KNOWLEDGE.fees,sourceIds:[]},'2026-10-30'),'missing');
   assert.equal(evidenceState(KNOWLEDGE.fees,'2026-12-01'),'stale');
 });
+
+import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
+test('all new browser modules pass JavaScript syntax checks',()=>{
+  for(const file of ['assistant.js','assistant-model.js','provider-adapter.js']) {
+    assert.doesNotThrow(()=>execFileSync(process.execPath,['--check',file],{stdio:'pipe'}));
+  }
+});
+test('page exposes labelled controls, local script and no external model script',()=>{
+  const html=readFileSync(new URL('./assistant.html',import.meta.url),'utf8');
+  for(const id of ['question','language','location','age','request','transcript','clear']) assert.match(html,new RegExp('id="'+id+'"'));
+  assert.match(html,/type="module" src="\.\/assistant\.js"/);
+  assert.match(html,/role="log"/);
+  assert.doesNotMatch(html,/<script[^>]*https?:/i);
+});
