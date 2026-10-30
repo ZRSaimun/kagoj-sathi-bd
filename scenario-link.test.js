@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {checklistLink, scenarioFromFragment, validScenario, CHECKLIST_PAGE} from './scenario-link.js';
 
 const choice = {location:'mission', age:'under18', request:'lost'};
@@ -37,4 +38,10 @@ test('the assistant and checklist actually import the same handoff contract', ()
   assert.match(assistant, /checklistLink\(scenario\)/);
   assert.match(checklist, /from '\.\/scenario-link\.js'/);
   assert.match(checklist, /scenarioFromFragment\(window\.location\.hash\)/);
+});
+
+test('both browser pages and the shared link module parse as JavaScript', () => {
+  for (const file of ['assistant.js', 'passport-guide.js', 'scenario-link.js']) {
+    assert.doesNotThrow(() => execFileSync(process.execPath, ['--check', file], {stdio:'pipe'}));
+  }
 });
